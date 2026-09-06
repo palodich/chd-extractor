@@ -4,13 +4,13 @@ Bulk-extract CHD disc images (CD-ROM, GD-ROM, and DVD-ROM) using [chdman](https:
 
 ## Requirements
 
-- A `chdman` binary in the same folder as `extract_chds.sh` (not included in this repo — download it from a [MAME release](https://www.mamedev.org/release.html) matching your platform).
+- A `chdman` binary in the same folder as `chd-extractor.sh` (not included in this repo — download it from a [MAME release](https://www.mamedev.org/release.html) matching your platform).
 - bash
 
 ## Usage
 
 ```sh
-./extract_chds.sh -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]
+./chd-extractor.sh -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]
 ```
 
 - `-i`, `--input` — folder containing `.chd` files (files directly inside this folder are processed; subfolders are not searched).
@@ -44,5 +44,5 @@ Dreamcast GD-ROM discs have a large gap between their two sessions. GDI represen
 ## Example
 
 ```sh
-./extract_chds.sh -i ~/roms/PS2/Discs -o ~/roms/PS2/Discs/output
+./chd-extractor.sh -i ~/roms/PS2/Discs -o ~/roms/PS2/Discs/output
 ```
