@@ -2,7 +2,9 @@
 #
 # Bulk-extract CHD disc images using chdman.
 #
-# Usage: ./chd-extractor.sh -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]
+# Usage: ./chd-extractor.sh -i <input_folder> [-o <output_folder>] [--extension .cue|.gdi|.iso]
+#
+# If -o is omitted, output goes to an "output" subfolder inside <input_folder>.
 #
 # For each .chd file directly inside <input_folder> (not recursive), extracts the
 # disc image into <output_folder>. Multi-file formats (.cue+.bin, .gdi+
@@ -30,7 +32,7 @@ else
 fi
 
 usage() {
-    echo "Usage: $0 -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]" >&2
+    echo "Usage: $0 -i <input_folder> [-o <output_folder>] [--extension .cue|.gdi|.iso]" >&2
     exit 1
 }
 
@@ -47,7 +49,8 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-[ -n "$INPUT_DIR" ] && [ -n "$OUTPUT_DIR" ] || usage
+[ -n "$INPUT_DIR" ] || usage
+[ -n "$OUTPUT_DIR" ] || OUTPUT_DIR="$INPUT_DIR/output"
 
 case "$FORCE_EXT" in
     ""|.cue|.gdi|.iso) ;;

@@ -10,11 +10,11 @@ Bulk-extract CHD disc images (CD-ROM, GD-ROM, and DVD-ROM) using [chdman](https:
 ## Usage
 
 ```sh
-./chd-extractor.sh -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]
+./chd-extractor.sh -i <input_folder> [-o <output_folder>] [--extension .cue|.gdi|.iso]
 ```
 
 - `-i`, `--input` — folder containing `.chd` files (files directly inside this folder are processed; subfolders are not searched).
-- `-o`, `--output` — folder to write extracted disc images into (created if it doesn't exist).
+- `-o`, `--output` — folder to write extracted disc images into (created if it doesn't exist). Defaults to an `output` subfolder inside `<input_folder>` if omitted.
 - `--extension` — force one output format for every file instead of auto-detecting.
 
 Already-extracted discs (an existing output file with the expected name) are skipped, so a batch can safely be re-run to resume after an interruption.
@@ -40,5 +40,7 @@ By default, each CHD's disc type is auto-detected via `chdman info`, by reading 
 ## Example
 
 ```sh
-./chd-extractor.sh -i ~/roms/PS2/Discs -o ~/roms/PS2/Discs/output
+./chd-extractor.sh -i ~/roms/PS2/Discs
 ```
+
+Extracts everything into `~/roms/PS2/Discs/output`.
