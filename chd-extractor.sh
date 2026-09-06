@@ -15,19 +15,19 @@
 #   'CHGD'            -> GD-ROM   -> extractcd  -> <name>.gdi
 #   anything else     -> CD-ROM   -> extractcd  -> <name>.cue + <name>.bin
 #
-# GD-ROM discs (Dreamcast) must be extracted to GDI, not CUE/BIN: GDI
-# represents the huge gap between the disc's two sessions structurally,
-# while forcing that gap into CUE/BIN format makes chdman (0.289) write
-# it out as literal data and run away writing far more data than the disc
-# actually contains.
-#
 # Pass --extension to force one format for every file instead of
 # auto-detecting (e.g. if you know every CHD in the folder is the same type).
+#
+# chdman is looked up next to this script, falling back to PATH.
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CHDMAN="$SCRIPT_DIR/chdman"
+if [ -x "$SCRIPT_DIR/chdman" ]; then
+    CHDMAN="$SCRIPT_DIR/chdman"
+else
+    CHDMAN="chdman"
+fi
 
 usage() {
     echo "Usage: $0 -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]" >&2
@@ -55,7 +55,7 @@ case "$FORCE_EXT" in
 esac
 
 [ -d "$INPUT_DIR" ] || { echo "Error: input folder '$INPUT_DIR' does not exist" >&2; exit 1; }
-[ -x "$CHDMAN" ] || { echo "Error: chdman binary not found or not executable at '$CHDMAN'" >&2; exit 1; }
+command -v "$CHDMAN" >/dev/null 2>&1 || { echo "Error: chdman not found next to this script or in PATH" >&2; exit 1; }
 
 mkdir -p "$OUTPUT_DIR"
 

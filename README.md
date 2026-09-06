@@ -4,7 +4,7 @@ Bulk-extract CHD disc images (CD-ROM, GD-ROM, and DVD-ROM) using [chdman](https:
 
 ## Requirements
 
-- A `chdman` binary in the same folder as `chd-extractor.sh` (not included in this repo — download it from a [MAME release](https://www.mamedev.org/release.html) matching your platform).
+- A `chdman` binary (not included in this repo — download it from a [MAME release](https://www.mamedev.org/release.html) matching your platform), either next to `chd-extractor.sh` or available on your `PATH`.
 - bash
 
 ## Usage
@@ -36,10 +36,6 @@ By default, each CHD's disc type is auto-detected via `chdman info`, by reading 
 | `DVD ` | DVD-ROM | `chdman extractdvd` | `.iso` |
 | `CHGD` | GD-ROM (Dreamcast) | `chdman extractcd` | `.gdi` |
 | anything else | CD-ROM | `chdman extractcd` | `.cue` + `.bin` |
-
-### Why GD-ROM needs GDI, not CUE/BIN
-
-Dreamcast GD-ROM discs have a large gap between their two sessions. GDI represents that gap structurally in its track table. CUE/BIN has no equivalent, so forcing a GD-ROM CHD into that format makes chdman write the gap out as literal data — and at least in chdman 0.289, this triggers a runaway write loop that never terminates on its own, consuming disk space indefinitely instead of stopping at the disc's actual size. Extracting to `.gdi` avoids the bug entirely and is also the Dreamcast-native format.
 
 ## Example
 
