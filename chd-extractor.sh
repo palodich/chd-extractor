@@ -2,7 +2,7 @@
 #
 # Bulk-extract CHD disc images using chdman.
 #
-# Usage: ./extract_chds.sh -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]
+# Usage: ./chd-extractor.sh -i <input_folder> -o <output_folder> [--extension .cue|.gdi|.iso]
 #
 # For each .chd file directly inside <input_folder> (not recursive), extracts the
 # disc image into <output_folder>. Multi-file formats (.cue+.bin, .gdi+
