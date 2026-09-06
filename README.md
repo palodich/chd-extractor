@@ -5,7 +5,6 @@ Bulk-extract CHD disc images (CD-ROM, GD-ROM, and DVD-ROM) using [chdman](https:
 ## Requirements
 
 - A `chdman` binary (not included in this repo — download it from a [MAME release](https://www.mamedev.org/release.html) matching your platform), either next to `chd-extractor.sh` or available on your `PATH`.
-- bash
 
 ## Usage
 
@@ -40,7 +39,7 @@ By default, each CHD's disc type is auto-detected via `chdman info`, by reading 
 ## Example
 
 ```sh
-./chd-extractor.sh -i ~/roms/PS2/Discs
+./chd-extractor.sh -i ~/roms/PS2
 ```
 
-Extracts everything into `~/roms/PS2/Discs/output`.
+Extracts everything into `~/roms/PS2/output`.
